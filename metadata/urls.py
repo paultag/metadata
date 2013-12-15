@@ -16,11 +16,7 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from django.conf.urls import patterns, include, url
-from django.contrib import admin
-
-admin.autodiscover()
 
 urlpatterns = patterns('',
-    url(r'^', include('metadata.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^$', 'metadata.views.home', name='home'),
 )

@@ -36,4 +36,8 @@ USE_L10N = True
 USE_TZ = True
 STATIC_URL = '/static/'
 
+TEMPLATE_DIRS = (
+    os.path.join(os.path.abspath(os.path.dirname(__file__)), "templates"),
+)
+
 from local_settings import *
