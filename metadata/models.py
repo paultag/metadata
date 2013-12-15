@@ -16,32 +16,33 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from django.db import models
+from django.contrib.auth.models import User
+
+
+LINK_TYPES = (
+    ('pdf', 'PDF'),
+    ('doc', 'Document'),
+    ('img', 'Image'),
+)
 
 
 class Meta(models.Model):
-    pass
-    # answer
-    # author
-    #
+    author = models.ForeignKey(User)
+    answer = models.CharField(max_length='128')
+
 
 class MetaDocument(models.Model):
-    pass
-    # link
-    # link_type
-    # author
-    #
+    author = models.ForeignKey(User)
+    link = models.URLField()
+    link_type = models.CharField(max_length=64, choices=LINK_TYPES)
 
 
 class Puzzle(models.Model):
-    pass
-    # author
-    # title
-    #
+    author = models.ForeignKey(User)
+    title = models.CharField(max_length='128')
 
 
 class PuzzleDocument(models.Model):
-    pass
-    # link
-    # link_type
-    # author
-    #
+    author = models.ForeignKey(User)
+    link = models.URLField()
+    link_type = models.CharField(max_length=64, choices=LINK_TYPES)
