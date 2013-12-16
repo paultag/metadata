@@ -17,7 +17,7 @@
                 <p>The answer is <code>{{puzzle.answer}}</code></p>
 {% endif %}
                 <p>
-{% for document in puzzle.documents %}
+{% for document in puzzle.documents.all %}
 {% endfor %}
                 </p>
             </div>

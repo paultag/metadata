@@ -1,19 +1,31 @@
 # -*- coding: utf-8 -*-
 from south.utils import datetime_utils as datetime
 from south.db import db
-from south.v2 import DataMigration
+from south.v2 import SchemaMigration
 from django.db import models
 
-class Migration(DataMigration):
+
+class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        "Write your forwards methods here."
-        # Note: Don't use "from appname.models import ModelName". 
-        # Use orm.ModelName to refer to models in this application,
-        # and orm['appname.ModelName'] for models in other applications.
+        # Adding field 'MetaDocument.meta'
+        db.add_column(u'metadata_metadocument', 'meta',
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, related_name='documents', to=orm['metadata.Meta']),
+                      keep_default=False)
+
+        # Adding field 'PuzzleDocument.puzzle'
+        db.add_column(u'metadata_puzzledocument', 'puzzle',
+                      self.gf('django.db.models.fields.related.ForeignKey')(default=1, related_name='documents', to=orm['metadata.Puzzle']),
+                      keep_default=False)
+
 
     def backwards(self, orm):
-        "Write your backwards methods here."
+        # Deleting field 'MetaDocument.meta'
+        db.delete_column(u'metadata_metadocument', 'meta_id')
+
+        # Deleting field 'PuzzleDocument.puzzle'
+        db.delete_column(u'metadata_puzzledocument', 'puzzle_id')
+
 
     models = {
         u'auth.group': {
@@ -99,4 +111,3 @@ class Migration(DataMigration):
     }
 
     complete_apps = ['metadata']
-    symmetrical = True
