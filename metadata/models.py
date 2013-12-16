@@ -65,6 +65,8 @@ class Puzzle(models.Model):
     title = models.CharField(max_length='128')
     meta = models.ForeignKey(Meta, related_name='puzzles')
     solved = models.BooleanField()
+    answer = models.CharField(max_length='128')
+
     __str__ = generic_str('title')
 
 
