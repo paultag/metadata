@@ -1,0 +1,28 @@
+{% extends "metadata/base.html" %}
+
+{% block title %}MetaData{% endblock %}
+
+
+{% block body %}
+    <div class="jumbotron">
+      <div class="container">
+        <h1>{{meta.title}}</h1>
+      </div>
+    </div>
+        <div class="row">
+{% for puzzle in meta.puzzles.all %}
+            <div class="col-6 col-sm-6 col-lg-4">
+                <h2>{{puzzle.title}}</h2>
+{% if puzzle.solved %}
+                <p>The answer is <code>{{puzzle.answer}}</code></p>
+{% endif %}
+                <p>
+{% for document in puzzle.documents %}
+{% endfor %}
+                </p>
+            </div>
+{% endfor %}
+        </div>
+    </div>
+
+{% endblock %}

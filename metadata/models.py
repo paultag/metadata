@@ -58,6 +58,7 @@ class MetaDocument(models.Model):
     author = models.ForeignKey(User)
     link = models.URLField()
     link_type = models.CharField(max_length=64, choices=LINK_TYPES)
+    meta = models.ForeignKey(Meta, related_name='documents')
 
 
 class Puzzle(models.Model):
@@ -74,6 +75,7 @@ class PuzzleDocument(models.Model):
     author = models.ForeignKey(User)
     link = models.URLField()
     link_type = models.CharField(max_length=64, choices=LINK_TYPES)
+    puzzle = models.ForeignKey(Puzzle, related_name='documents')
 
 
 class PuzzleTeamMembership(models.Model):

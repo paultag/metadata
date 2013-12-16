@@ -53,3 +53,27 @@ def metas(request):
         "team": team,
         "metas": metas,
     }, content_type="text/html")
+
+
+def meta(request, mid):
+    user = request.user
+    try:
+        membership = PuzzleTeamMembership.objects.get(member=user.id)
+    except PuzzleTeamMembership.DoesNotExist:
+        return redirect(pick_team)
+    team = membership.team
+
+    try:
+        meta = Meta.objects.get(id=mid)
+    except Meta.DoesNotExist:
+        return redirect(home)
+
+    if meta.team != team:
+        return redirect(home)
+
+    return render(request, 'metadata/meta.html', {
+        "meta": meta,
+        "team": team,
+        "membership": membership,
+        "user": user,
+    }, content_type="text/html")

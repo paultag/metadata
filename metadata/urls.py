@@ -20,5 +20,6 @@ from django.conf.urls import patterns, include, url
 urlpatterns = patterns('',
     url(r'^$', 'metadata.views.home', name='home'),
     url(r'^metas/$', 'metadata.views.metas', name='metas'),
+    url(r'^meta/(?P<mid>.*)/$', 'metadata.views.meta', name='meta'),
     url(r'^pick-team/$', 'metadata.views.pick_team', name='pick_team'),
 )
