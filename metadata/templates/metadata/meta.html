@@ -7,6 +7,11 @@
     <div class="jumbotron">
       <div class="container">
         <h1>{{meta.title}}</h1>
+        <ul>
+        {% for document in meta.documents.all %}
+            <li>{{document.title}}</li>
+        {% endfor %}
+        </ul>
       </div>
     </div>
         <div class="row">
@@ -17,8 +22,11 @@
                 <p>The answer is <code>{{puzzle.answer}}</code></p>
 {% endif %}
                 <p>
-{% for document in puzzle.documents.all %}
-{% endfor %}
+                    <ul>
+                    {% for document in puzzle.documents.all %}
+                        <li>{{document.title}}</li>
+                    {% endfor %}
+                    </ul>
                 </p>
             </div>
 {% endfor %}

@@ -29,6 +29,7 @@ LINK_TYPES = (
     ('pdf', 'PDF'),
     ('doc', 'Document'),
     ('img', 'Image'),
+    ('web', 'Website'),
 )
 
 
@@ -59,6 +60,7 @@ class MetaDocument(models.Model):
     link = models.URLField()
     link_type = models.CharField(max_length=64, choices=LINK_TYPES)
     meta = models.ForeignKey(Meta, related_name='documents')
+    title = models.CharField(max_length='128')
 
 
 class Puzzle(models.Model):
@@ -76,6 +78,7 @@ class PuzzleDocument(models.Model):
     link = models.URLField()
     link_type = models.CharField(max_length=64, choices=LINK_TYPES)
     puzzle = models.ForeignKey(Puzzle, related_name='documents')
+    title = models.CharField(max_length='128')
 
 
 class PuzzleTeamMembership(models.Model):
