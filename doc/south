@@ -1,0 +1,4 @@
+Hey dummy,
+
+manage.py schemamigration metadata --auto
+manage.py migrate metadata
