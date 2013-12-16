@@ -16,5 +16,35 @@
 # along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from django.contrib import admin
+from metadata.models import (Meta, MetaDocument, Puzzle, PuzzleDocument,
+                             PuzzleTeam, PuzzleTeamMembership)
 
-# Register your models here.
+
+class MetaAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Meta, MetaAdmin)
+
+
+class MetaDocumentAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(MetaDocument, MetaDocumentAdmin)
+
+
+class PuzzleAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Puzzle, PuzzleAdmin)
+
+
+class PuzzleDocumentAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(PuzzleDocument, PuzzleDocumentAdmin)
+
+
+class PuzzleTeamAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(PuzzleTeam, PuzzleTeamAdmin)
+
+
+class PuzzleTeamMembershipAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(PuzzleTeamMembership, PuzzleTeamMembershipAdmin)

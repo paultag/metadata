@@ -19,6 +19,12 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
+def generic_str(what):
+    def _(self):
+        return "<%s:%s>" % (self.__class__.__name__, getattr(self, what))
+    return _
+
+
 LINK_TYPES = (
     ('pdf', 'PDF'),
     ('doc', 'Document'),
@@ -26,9 +32,18 @@ LINK_TYPES = (
 )
 
 
+class PuzzleTeam(models.Model):
+    name = models.CharField(max_length='128')
+    __str__ = generic_str('name')
+
+
 class Meta(models.Model):
     author = models.ForeignKey(User)
+    title = models.CharField(max_length='128')
     answer = models.CharField(max_length='128')
+    team = models.OneToOneField(PuzzleTeam, primary_key=True)
+
+    __str__ = generic_str('title')
 
 
 class MetaDocument(models.Model):
@@ -40,9 +55,21 @@ class MetaDocument(models.Model):
 class Puzzle(models.Model):
     author = models.ForeignKey(User)
     title = models.CharField(max_length='128')
+    meta = models.ForeignKey(Meta)
+    solved = models.BooleanField()
+    __str__ = generic_str('title')
 
 
 class PuzzleDocument(models.Model):
     author = models.ForeignKey(User)
     link = models.URLField()
     link_type = models.CharField(max_length=64, choices=LINK_TYPES)
+
+
+class PuzzleTeamMembership(models.Model):
+    member = models.ForeignKey(User)
+    team = models.ForeignKey(PuzzleTeam)
+
+    def __str__(self):
+        return "<%s, on the %s team>" % (self.author.username,
+                                               self.team.name)

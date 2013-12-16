@@ -1,0 +1,27 @@
+{% extends "metadata/base.html" %}
+
+{% block title %}MetaData{% endblock %}
+
+
+{% block body %}
+    <div class="jumbotron">
+      <div class="container">
+          <h1>Pick a Team{% if membership %}<small>(You're currently on {{membership.team.name}})</small>{% endif %}</h1>
+        <p>Each team is tied to a set of Metas. The teams will solve their
+           assigned subset of metas, so that teams can't spoil each other.
+           Pick a team to hunt with. Since they don't overlap, you can
+           change this at any time.</p>
+
+       <form action='#' method='POST'>
+            {% csrf_token %}
+            <select name='team'>
+{% for team in teams %}
+                <option value='{{team.id}}' >{{team.name}}</option>
+{% endfor %}
+            </select>
+            <input value='Join Team &raquo;' type='submit' class="btn btn-primary btn-lg" />
+        </form>
+      </div>
+    </div>
+
+{% endblock %}

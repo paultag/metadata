@@ -1,0 +1,20 @@
+{% extends "metadata/base.html" %}
+
+{% block title %}MetaData{% endblock %}
+
+
+{% block body %}
+
+{% for meta in metas %}
+<div class="row">
+    <div class="col-lg-4">
+    <h2>{{meta.title}}</h2>
+    <p>({{meta.puzzles_solved}} / {{meta.puzzles_total}} solved)</p>
+    <p><a class="btn btn-default" href="#" role="button">View meta &raquo;</a></p>
+</div>
+{% empty %}
+    <h2>Sorry, Nothing here.</h2>
+{% endfor %}
+
+
+{% endblock %}
