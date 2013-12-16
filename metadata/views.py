@@ -41,9 +41,12 @@ def pick_team(request):
 def metas(request):
     user = request.user
     try:
-        team = PuzzleTeamMembership.objects.get(member=user.id)
+        membership = PuzzleTeamMembership.objects.get(member=user.id)
     except PuzzleTeamMembership.DoesNotExist:
         return redirect(pick_team)
+
+    team = membership.team
+    metas = team.metas
 
     return render(request, 'metadata/metas.html', {
         "user": user,

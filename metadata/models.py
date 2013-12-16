@@ -41,7 +41,15 @@ class Meta(models.Model):
     author = models.ForeignKey(User)
     title = models.CharField(max_length='128')
     answer = models.CharField(max_length='128')
-    team = models.OneToOneField(PuzzleTeam, primary_key=True)
+    team = models.ForeignKey(PuzzleTeam, related_name='metas')
+
+    # <p>({{meta.puzzles_solved}} / {{meta.puzzles_total}} solved)</p>
+
+    def puzzles_solved(self):
+        return self.puzzles.filter(solved=True).count()
+
+    def puzzles_total(self):
+        return self.puzzles.count()
 
     __str__ = generic_str('title')
 
@@ -55,7 +63,7 @@ class MetaDocument(models.Model):
 class Puzzle(models.Model):
     author = models.ForeignKey(User)
     title = models.CharField(max_length='128')
-    meta = models.ForeignKey(Meta)
+    meta = models.ForeignKey(Meta, related_name='puzzles')
     solved = models.BooleanField()
     __str__ = generic_str('title')
 
